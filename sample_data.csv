@@ -1,0 +1,17 @@
+lead_id,lead_name,territory,lead_source,status,created_date,appointment_date,closed_date,next_follow_up,revenue
+DEMO-001,Demo Lead 01,North,Referral,Closed Won,2026-09-01,2026-09-03,2026-09-07,,2400
+DEMO-002,Demo Lead 02,South,Website,Closed Lost,2026-09-01,2026-09-02,2026-09-05,,0
+DEMO-003,Demo Lead 03,East,Event,Appointment,2026-09-02,2026-09-07,,2026-09-07,0
+DEMO-004,Demo Lead 04,West,Outbound,New,2026-09-07,,,2026-09-08,0
+DEMO-005,Demo Lead 05,North,Website,Contacted,2026-09-03,,,2026-09-06,0
+DEMO-006,Demo Lead 06,South,Referral,Proposal,2026-09-02,2026-09-04,,2026-09-07,0
+DEMO-007,Demo Lead 07,East,Website,Closed Won,2026-09-01,2026-09-02,2026-09-04,,1800
+DEMO-008,Demo Lead 08,West,Event,Closed Won,2026-09-02,2026-09-05,2026-09-07,,3200
+DEMO-009,Demo Lead 09,North,Outbound,Contacted,2026-09-05,,,,0
+DEMO-010,Demo Lead 10,South,Event,New,2026-09-07,,,2026-09-07,0
+DEMO-011,Demo Lead 11,East,Referral,Proposal,2026-09-03,2026-09-05,,2026-09-06,0
+DEMO-012,Demo Lead 12,West,Website,Appointment,2026-09-04,2026-09-08,,2026-09-08,0
+DEMO-013,Demo Lead 13,North,Event,Closed Lost,2026-09-01,,2026-09-06,,0
+DEMO-014,Demo Lead 14,South,Outbound,Closed Won,2026-09-01,2026-09-03,2026-09-06,,1500
+DEMO-015,Demo Lead 15,East,Outbound,New,2026-09-06,,,2026-09-09,0
+DEMO-016,Demo Lead 16,West,Referral,Appointment,2026-09-05,2026-09-07,,2026-09-07,0
