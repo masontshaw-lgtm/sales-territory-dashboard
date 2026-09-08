@@ -20,7 +20,7 @@ class DashboardTests(unittest.TestCase):
     def test_flags_exclude_closed_and_distinguish_missing_dates(self):
         flags = add_flags(self.frame, date(2026, 9, 7)).set_index("lead_id").follow_up_flag
         self.assertEqual(flags["DEMO-001"], "Closed")
-        self.assertEqual(flags["DEMO-005"], "Overdue")
+        self.assertEqual(flags["DEMO-005"], "Overdue — follow up")
         self.assertEqual(flags["DEMO-003"], "Due today")
         self.assertEqual(flags["DEMO-009"], "Due today")
         self.assertEqual(flags["DEMO-004"], "Upcoming")

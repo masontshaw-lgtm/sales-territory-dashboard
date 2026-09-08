@@ -62,7 +62,7 @@ def add_flags(frame, report_date):
     frame["follow_up_flag"] = "Closed"
     frame.loc[active, "follow_up_flag"] = "Upcoming"
     frame.loc[active & frame.next_follow_up.isna(), "follow_up_flag"] = "Missing date"
-    frame.loc[active & frame.next_follow_up.lt(today), "follow_up_flag"] = "Overdue"
+    frame.loc[active & frame.next_follow_up.lt(today), "follow_up_flag"] = "Overdue — follow up"
     frame.loc[active & frame.next_follow_up.eq(today), "follow_up_flag"] = "Due today"
     return frame
 
@@ -118,7 +118,7 @@ def main():
         view = view[view.lead_name.str.contains(query.strip(), case=False, regex=False) |
                     view.lead_id.str.contains(query.strip(), case=False, regex=False)]
     if follow_only:
-        view = view[view.follow_up_flag.isin(["Overdue", "Due today", "Missing date"])]
+        view = view[view.follow_up_flag.isin(["Overdue — follow up", "Due today", "Missing date"])]
     st.caption(f"{label} · Showing {len(view)} of {len(frame)} leads · All summaries follow the filters.")
     st.caption("Report date controls daily activity and follow-up flags. Totals use current CSV statuses; this is not a historical snapshot.")
     if view.empty:
@@ -135,7 +135,7 @@ def main():
     st.write(f'{metrics["new_today"]} new leads · {metrics["appointments_today"]} appointments · '
              f'{metrics["won_today"]} jobs won · ${metrics["revenue_today"]:,.2f} revenue closed on this date.')
     flags = view.follow_up_flag.value_counts()
-    st.write(f'Follow-up: {flags.get("Overdue", 0)} overdue · {flags.get("Due today", 0)} due today · '
+    st.write(f'Follow-up: {flags.get("Overdue — follow up", 0)} overdue - follow up · {flags.get("Due today", 0)} due today · '
              f'{flags.get("Missing date", 0)} open leads missing a follow-up date.')
     left, right = st.columns(2)
     with left:
@@ -147,7 +147,7 @@ def main():
         revenue = revenue.reindex(sorted(view.lead_source.unique()), fill_value=0)
         st.bar_chart(revenue.rename("Revenue (USD)"))
     st.subheader("Follow-up queue")
-    due = view[view.follow_up_flag.isin(["Overdue", "Due today", "Missing date"])].sort_values("next_follow_up", na_position="last")
+    due = view[view.follow_up_flag.isin(["Overdue — follow up", "Due today", "Missing date"])].sort_values("next_follow_up", na_position="last")
     if due.empty:
         st.success("No follow-ups need attention in this view.")
     else:
