@@ -16,6 +16,8 @@ A Python dashboard that helps a fictional sales representative see lead progress
 
 ## Run on your Mac
 
+If the environment is already installed, double-click `Start Dashboard.command` in Finder. Keep its Terminal window open while using the dashboard. If the browser says connection refused, restart with this launcher, then reload the page. Closing Terminal or stopping the app makes the local address unavailable.
+
 Use Python 3.10–3.13 (this project was developed with Python 3.12) and Git. Open Terminal in this project folder, then:
 
 ```bash
