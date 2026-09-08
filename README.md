@@ -125,25 +125,31 @@ git log --oneline
 
 `status` lists changed files. `diff` shows the exact edits. `add` selects what goes into a checkpoint. `commit` saves it with an explanation. `log` shows the story of the project. If a test fails after you change expected data, work out why before updating its expected result.
 
-## Publish to GitHub when ready
+## GitHub repository
 
-This project is prepared locally; it has not been uploaded to GitHub.
+Source code is public at [masontshaw-lgtm/sales-territory-dashboard](https://github.com/masontshaw-lgtm/sales-territory-dashboard). Git was initialized before the dashboard implementation; the history records setup, the working dashboard, the Mac launcher, and subsequent refinements.
 
-1. Review every tracked file with `git ls-files` and confirm it contains sample data only.
-2. Create an empty repository named `sales-territory-dashboard` on GitHub. Do not initialize another README or .gitignore there.
-3. Replace `YOUR_USERNAME` below and run:
+After making and testing a local change:
 
 ```bash
-git remote add origin https://github.com/YOUR_USERNAME/sales-territory-dashboard.git
-git push -u origin main
+git diff
+git add <files-you-changed>
+git commit -m "Describe the change and its purpose"
+git push origin main
 ```
 
-GitHub may ask you to sign in. Never paste passwords or tokens into project files. After publication, verify the README and sample CSV on GitHub. Publishing the repository shares the source; it does not deploy the running dashboard.
+Replace `<files-you-changed>` with the specific filenames you reviewed. A commit saves a local checkpoint; a push copies committed changes to GitHub. Review files before committing and keep all data fictional. Publishing source code does not host the running app; run it locally using the instructions above.
+
+## v1 scope and portfolio wording
+
+Status tracking displays the current status recorded in the CSV. To change a status, edit a fictional CSV and load it again. There is no in-app lead editor, database, CRM connection, or status-change history in v1.
+
+See [PORTFOLIO.md](PORTFOLIO.md) for a short GitHub description, a LinkedIn project entry, and a practical interview walkthrough.
 
 ## Learning milestones
 
 1. **Python + Git now:** run the app, explain one function, make a small change, inspect the diff, and commit it yourself.
-2. **GitHub next:** publish the repository, open an issue, make a branch, and merge a pull request for one improvement.
+2. **GitHub next:** open an issue, make a branch, and merge a pull request for one improvement in the published repository.
 3. **Basic SQL later:** store synthetic leads in SQLite and reproduce the source revenue chart with `SELECT`, `GROUP BY`, and `SUM`.
 4. **APIs later:** add a local sample-data endpoint; practice HTTP, JSON, timeouts, and error handling without private credentials.
 5. **HTML/CSS later:** build a small custom presentation layer and explain the styling you write.
