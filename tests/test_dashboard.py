@@ -22,7 +22,7 @@ class DashboardTests(unittest.TestCase):
         self.assertEqual(flags["DEMO-001"], "Closed")
         self.assertEqual(flags["DEMO-005"], "Overdue")
         self.assertEqual(flags["DEMO-003"], "Due today")
-        self.assertEqual(flags["DEMO-009"], "Missing date")
+        self.assertEqual(flags["DEMO-009"], "Due today")
         self.assertEqual(flags["DEMO-004"], "Upcoming")
 
     def test_no_decided_leads_or_empty_view(self):

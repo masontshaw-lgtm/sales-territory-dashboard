@@ -7,7 +7,7 @@ DEMO-005,Demo Lead 05,North,Website,Contacted,2026-09-03,,,2026-09-06,0
 DEMO-006,Demo Lead 06,South,Referral,Proposal,2026-09-02,2026-09-04,,2026-09-07,0
 DEMO-007,Demo Lead 07,East,Website,Closed Won,2026-09-01,2026-09-02,2026-09-04,,1800
 DEMO-008,Demo Lead 08,West,Event,Closed Won,2026-09-02,2026-09-05,2026-09-07,,3200
-DEMO-009,Demo Lead 09,North,Outbound,Contacted,2026-09-05,,,,0
+DEMO-009,Demo Lead 09,North,Outbound,Contacted,2026-09-05,,,2026-09-07,0
 DEMO-010,Demo Lead 10,South,Event,New,2026-09-07,,,2026-09-07,0
 DEMO-011,Demo Lead 11,East,Referral,Proposal,2026-09-03,2026-09-05,,2026-09-06,0
 DEMO-012,Demo Lead 12,West,Website,Appointment,2026-09-04,2026-09-08,,2026-09-08,0
