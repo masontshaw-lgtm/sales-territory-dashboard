@@ -82,8 +82,8 @@ def summarize(frame, report_date):
 
 
 def main():
-    st.set_page_config(page_title="Sales Territory Dashboard", page_icon="📊", layout="wide")
-    st.title("Sales Territory Dashboard")
+    st.set_page_config(page_title="Mason's Territory Dashboard", page_icon="📊", layout="wide")
+    st.title("Mason's Sales Territory Dashboard")
     st.caption("Mason’s portfolio project · Python + Streamlit · Fictional data only")
     with st.sidebar:
         st.header("Your daily view")
