@@ -155,6 +155,11 @@ def main():
         st.dataframe(due[["lead_id", "lead_name", "status", "next_follow_up", "follow_up_flag"]], hide_index=True)
     st.subheader("Lead details")
     st.dataframe(view, hide_index=True)
+    st.download_button(
+        "Download filtered leads",
+        data=view.to_csv(index=False).encode("utf-8"),
+        file_name="filtered_leads.csv",
+        mime="text/csv",        disabled=view.empty)
     with st.expander("How this project works"):
         st.write("Python reads and validates the CSV. pandas filters rows and calculates totals. Streamlit turns those results into this page. Uploads are processed in memory and are not saved by this app.")
 
