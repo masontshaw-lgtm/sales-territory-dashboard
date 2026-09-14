@@ -115,11 +115,15 @@ def main():
     except (ValueError, UnicodeDecodeError) as error:
         st.error(f"Cannot load this CSV: {error}")
         st.stop()
+    # Initialize once; reset_filters updates the same stored values on clicks.
+    st.session_state.setdefault("territories", sorted(frame.territory.unique()))
+    st.session_state.setdefault("lead_sources", sorted(frame.lead_source.unique()))
+    st.session_state.setdefault("lead_statuses", list(STATUSES))
     with st.sidebar:
         report_date = st.date_input("Report date", value=default_date)
-        territories = st.multiselect("Territories", sorted(frame.territory.unique()), default=sorted(frame.territory.unique()), key="territories")
-        sources = st.multiselect("Lead sources", sorted(frame.lead_source.unique()), default=sorted(frame.lead_source.unique()), key="lead_sources")
-        statuses = st.multiselect("Lead statuses", STATUSES, default=STATUSES, key="lead_statuses")
+        territories = st.multiselect("Territories", sorted(frame.territory.unique()), key="territories")
+        sources = st.multiselect("Lead sources", sorted(frame.lead_source.unique()), key="lead_sources")
+        statuses = st.multiselect("Lead statuses", STATUSES, key="lead_statuses")
         query = st.text_input("Search lead name or ID", placeholder="Example: Demo Lead 01", key="lead_search")
         st.button("Reset filters", on_click=reset_filters,
                   args=(sorted(frame.territory.unique()), sorted(frame.lead_source.unique())))

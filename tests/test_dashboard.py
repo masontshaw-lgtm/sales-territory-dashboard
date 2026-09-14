@@ -94,7 +94,9 @@ class DashboardTests(unittest.TestCase):
         app.text_input[0].set_value("no match")
         app.checkbox[1].set_value(True).run()
         self.assertEqual(app.metric[0].value, "0")
-        app.button[0].click().run()
+        with patch("streamlit.elements.lib.policies._shown_default_value_warning", False):
+            app.button[0].click().run()
+        self.assertFalse(app.warning)
         self.assertFalse(app.exception)
         self.assertEqual(app.multiselect[0].value, sorted(self.frame.territory.unique()))
         self.assertEqual(app.multiselect[1].value, sorted(self.frame.lead_source.unique()))
@@ -105,7 +107,9 @@ class DashboardTests(unittest.TestCase):
         self.assertEqual(app.metric[0].value, "16")
         self.assertEqual(app.metric[4].value, "$8,900.00")
         # Repeating a reset must leave the restored view usable.
-        app.button[0].click().run()
+        with patch("streamlit.elements.lib.policies._shown_default_value_warning", False):
+            app.button[0].click().run()
+        self.assertFalse(app.warning)
         self.assertFalse(app.exception)
         self.assertEqual(app.metric[0].value, "16")
 
