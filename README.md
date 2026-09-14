@@ -4,6 +4,8 @@ A Python dashboard that helps a fictional sales representative see lead progress
 
 **Sample data only:** every record is invented. Do not upload real ADT, employer, customer, or confidential information. This is a learning project, not an approved business system.
 
+![Sales Territory Dashboard showing fictional sample leads, filters, close rate, and revenue charts](docs/dashboard.png)
+
 ## What it does
 
 - Loads 16 fictional leads automatically, or accepts a sample CSV upload.
