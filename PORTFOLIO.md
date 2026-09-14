@@ -12,7 +12,7 @@ Python and Streamlit portfolio dashboard using fictional leads to show pipeline 
 
 **Project URL:** https://github.com/masontshaw-lgtm/sales-territory-dashboard
 
-**Description:** Built an AI-assisted learning project with Python, pandas, and Streamlit to explore sales pipeline reporting using fictional data. The working v1 includes lead status summaries, close rate, revenue by source, follow-up flags, and interactive filters and search. Added CSV validation, six automated tests, setup documentation, and a Git/GitHub commit history. Runs locally; ongoing learning focuses on understanding and extending the code.
+**Description:** Built an AI-assisted learning project with Python, pandas, and Streamlit to explore sales pipeline reporting using fictional data. The working v1 includes lead status summaries, close rate, revenue by source, follow-up flags, interactive filters and search, and filtered CSV downloads. Added CSV validation, seven automated tests, setup documentation, and a Git/GitHub commit history. Runs locally; ongoing learning focuses on understanding and extending the code.
 
 **Skills:** Python, pandas, Streamlit, Git, GitHub, Data Validation
 
@@ -29,7 +29,7 @@ This entry is prepared for review and has not been posted to LinkedIn.
 3. **Explain a calculation:** summarize() counts four wins and two losses in the sample, giving 4 / 6 = 66.7%. Won revenue totals $8,900.
 4. **Explain follow-ups:** add_flags() compares open leads' next follow-up dates with the selected report date. Closed leads stay out of the queue.
 5. **Demonstrate the interface:** search DEMO-001, clear the search, and turn on the follow-up-only filter. Explain that summaries change with the visible rows.
-6. **Explain verification:** six tests cover sample totals, follow-up behavior, empty results, CSV handling, and interface filters. Tests are repeatable checks, not a guarantee against every possible bug.
+6. **Explain verification:** seven tests cover sample totals, follow-up behavior, empty results, CSV handling, interface filters, and filtered CSV downloads. Tests are repeatable checks, not a guarantee against every possible bug.
 7. **Explain version control:** use git log --oneline to show the saved checkpoints. Use git diff before a commit to review exactly what changed.
 
 ## Boundaries to state accurately

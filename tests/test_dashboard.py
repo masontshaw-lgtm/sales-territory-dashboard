@@ -1,5 +1,8 @@
 """Run with python -m unittest discover -s tests -v."""
 import unittest
+from unittest.mock import patch
+import pandas as pd
+import streamlit as st
 from datetime import date
 from io import StringIO
 from pathlib import Path
@@ -42,6 +45,44 @@ class DashboardTests(unittest.TestCase):
                         raw.replace("2026-09-08,0", "2026-09-08,100")]:
             with self.subTest(invalid=invalid[:40]), self.assertRaises(ValueError):
                 load_data(StringIO(invalid))
+
+    def test_download_follows_search_and_disables_for_empty_results(self):
+        # Capture the bytes sent to Streamlit while still rendering the real button.
+        with patch("streamlit.download_button", wraps=st.download_button) as download:
+            app = AppTest.from_file(str(Path(__file__).resolve().parents[1] / "app.py"))
+            app.run(timeout=30)
+
+            def exported_rows():
+                self.assertFalse(app.exception)
+                calls = [call for call in download.call_args_list
+                         if call.args and call.args[0] == "Download filtered leads"]
+                self.assertTrue(calls, "The filtered download button must be rendered")
+                options = calls[-1].kwargs
+                self.assertEqual(options["file_name"], "filtered_leads.csv")
+                self.assertEqual(options["mime"], "text/csv")
+                return pd.read_csv(StringIO(options["data"].decode("utf-8"))), options
+
+            rows, options = exported_rows()
+            self.assertEqual(rows.lead_id.tolist(), self.frame.lead_id.tolist())
+            self.assertEqual(rows.columns.tolist(), self.frame.columns.tolist() + ["follow_up_flag"])
+            self.assertFalse(options["disabled"])
+
+            app.text_input[0].set_value("DEMO-001").run()
+            rows, options = exported_rows()
+            self.assertEqual(rows.lead_id.tolist(), ["DEMO-001"])
+            self.assertEqual(rows.revenue.tolist(), [2400])
+            self.assertEqual(rows.follow_up_flag.tolist(), ["Closed"])
+            self.assertFalse(options["disabled"])
+
+            app.text_input[0].set_value("no match").run()
+            rows, options = exported_rows()
+            self.assertTrue(rows.empty)
+            self.assertTrue(options["disabled"])
+
+            app.text_input[0].set_value("").run()
+            rows, options = exported_rows()
+            self.assertEqual(len(rows), 16)
+            self.assertFalse(options["disabled"])
 
     def test_interface_filters_and_empty_state(self):
         app = AppTest.from_file(str(Path(__file__).resolve().parents[1] / "app.py")).run(timeout=30)

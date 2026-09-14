@@ -9,6 +9,7 @@ A Python dashboard that helps a fictional sales representative see lead progress
 - Loads 16 fictional leads automatically, or accepts a sample CSV upload.
 - Summarizes lead statuses, appointments, won jobs, close rate, and revenue.
 - Charts won revenue by lead source.
+- Downloads the currently filtered leads as a CSV, including follow-up flags.
 - Filters by territory, lead source, status, and literal name/ID search.
 - Flags overdue follow-ups, follow-ups due today, and missing follow-up dates.
 - Shows new leads, appointments, won jobs, and won revenue for a selected day.
@@ -41,6 +42,14 @@ If your `python3 --version` reports 3.9, select an installed newer Python execut
 4. Clear that checkbox and search `DEMO-001`. Only one lead should remain.
 5. Download the sample CSV. Make a copy outside the repository, change a fictional territory, confirm that the upload is fictional, and upload the copy.
 6. Try an invalid status in your copy. Explain why validation catches it.
+
+## Download filtered leads
+
+After choosing filters or searching, click **Download filtered leads** below the lead table. The downloaded `filtered_leads.csv` contains only the visible leads, with the displayed follow-up flags and no extra row-number column. Open it in Numbers, Excel, or a text editor. The button is disabled when no leads match.
+
+Try searching `DEMO-001`: the download should have one lead with 2,400 revenue. Search `no match`: the button should be disabled. Clear the search to enable it again.
+
+This is a reporting export. It includes the extra `follow_up_flag` column, so it is not accepted directly by the strict CSV uploader. For uploads, use the sample CSV's ten-column format.
 
 ## How the numbers work
 
@@ -101,7 +110,7 @@ With your environment active:
 python -m unittest discover -s tests -v
 ```
 
-Tests check known sample totals, follow-up boundaries, empty views, malformed uploads, and interactive searching/filtering using [Streamlit AppTest](https://docs.streamlit.io/develop/api-reference/app-testing/st.testing.v1.apptest). Automated parsing checks use in-memory CSV uploads; the browser file picker itself is a manual check using the five-minute walkthrough.
+Seven tests check known sample totals, follow-up boundaries, empty views, malformed uploads, filtered CSV content and download-button availability, and interactive searching/filtering using [Streamlit AppTest](https://docs.streamlit.io/develop/api-reference/app-testing/st.testing.v1.apptest). Automated parsing checks use in-memory CSV uploads; the browser file picker itself is a manual check using the five-minute walkthrough.
 
 ## Your first Git exercise
 

@@ -159,7 +159,9 @@ def main():
         "Download filtered leads",
         data=view.to_csv(index=False).encode("utf-8"),
         file_name="filtered_leads.csv",
-        mime="text/csv",        disabled=view.empty)
+        mime="text/csv",
+        disabled=view.empty,
+    )
     with st.expander("How this project works"):
         st.write("Python reads and validates the CSV. pandas filters rows and calculates totals. Streamlit turns those results into this page. Uploads are processed in memory and are not saved by this app.")
 
