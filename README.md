@@ -11,6 +11,7 @@ A Python dashboard that helps a fictional sales representative see lead progress
 - Charts won revenue by lead source.
 - Downloads the currently filtered leads as a CSV, including follow-up flags.
 - Filters by territory, lead source, status, and literal name/ID search.
+- Resets all filters with one button directly below the search box. The report date and selected data stay in place.
 - Flags overdue follow-ups, follow-ups due today, and missing follow-up dates.
 - Shows new leads, appointments, won jobs, and won revenue for a selected day.
 - Rejects malformed data with readable errors instead of showing misleading totals.
@@ -110,7 +111,7 @@ With your environment active:
 python -m unittest discover -s tests -v
 ```
 
-Seven tests check known sample totals, follow-up boundaries, empty views, malformed uploads, filtered CSV content and download-button availability, and interactive searching/filtering using [Streamlit AppTest](https://docs.streamlit.io/develop/api-reference/app-testing/st.testing.v1.apptest). Automated parsing checks use in-memory CSV uploads; the browser file picker itself is a manual check using the five-minute walkthrough.
+Eight tests check known sample totals, follow-up boundaries, empty views, malformed uploads, filtered CSV content and download-button availability, filter reset behavior, and interactive searching/filtering using [Streamlit AppTest](https://docs.streamlit.io/develop/api-reference/app-testing/st.testing.v1.apptest). Automated parsing checks use in-memory CSV uploads; the browser file picker itself is a manual check using the five-minute walkthrough.
 
 ## Your first Git exercise
 

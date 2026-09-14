@@ -84,6 +84,31 @@ class DashboardTests(unittest.TestCase):
             self.assertEqual(len(rows), 16)
             self.assertFalse(options["disabled"])
 
+    def test_reset_restores_filters_and_preserves_report_date(self):
+        app = AppTest.from_file(str(Path(__file__).resolve().parents[1] / "app.py")).run(timeout=30)
+        report_date = date(2026, 9, 10)
+        app.date_input[0].set_value(report_date)
+        app.multiselect[0].set_value([])
+        app.multiselect[1].set_value(["Referral"])
+        app.multiselect[2].set_value(["New"])
+        app.text_input[0].set_value("no match")
+        app.checkbox[1].set_value(True).run()
+        self.assertEqual(app.metric[0].value, "0")
+        app.button[0].click().run()
+        self.assertFalse(app.exception)
+        self.assertEqual(app.multiselect[0].value, sorted(self.frame.territory.unique()))
+        self.assertEqual(app.multiselect[1].value, sorted(self.frame.lead_source.unique()))
+        self.assertEqual(app.multiselect[2].value, app.multiselect[2].options)
+        self.assertEqual(app.text_input[0].value, "")
+        self.assertFalse(app.checkbox[1].value)
+        self.assertEqual(app.date_input[0].value, report_date)
+        self.assertEqual(app.metric[0].value, "16")
+        self.assertEqual(app.metric[4].value, "$8,900.00")
+        # Repeating a reset must leave the restored view usable.
+        app.button[0].click().run()
+        self.assertFalse(app.exception)
+        self.assertEqual(app.metric[0].value, "16")
+
     def test_interface_filters_and_empty_state(self):
         app = AppTest.from_file(str(Path(__file__).resolve().parents[1] / "app.py")).run(timeout=30)
         self.assertFalse(app.exception)

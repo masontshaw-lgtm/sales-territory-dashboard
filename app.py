@@ -82,6 +82,15 @@ def summarize(frame, report_date):
                 revenue_today=float(frame.loc[won & frame.closed_date.eq(day), "revenue"].sum()))
 
 
+def reset_filters(territories, sources):
+    """Restore filter widgets before Streamlit redraws the page."""
+    st.session_state["territories"] = list(territories)
+    st.session_state["lead_sources"] = list(sources)
+    st.session_state["lead_statuses"] = list(STATUSES)
+    st.session_state["lead_search"] = ""
+    st.session_state["follow_only"] = False
+
+
 def main():
     st.set_page_config(page_title="Mason's Territory Dashboard", page_icon="📊", layout="wide")
     st.title("Mason's Sales Territory Dashboard")
@@ -108,11 +117,13 @@ def main():
         st.stop()
     with st.sidebar:
         report_date = st.date_input("Report date", value=default_date)
-        territories = st.multiselect("Territories", sorted(frame.territory.unique()), default=sorted(frame.territory.unique()))
-        sources = st.multiselect("Lead sources", sorted(frame.lead_source.unique()), default=sorted(frame.lead_source.unique()))
-        statuses = st.multiselect("Lead statuses", STATUSES, default=STATUSES)
-        query = st.text_input("Search lead name or ID", placeholder="Example: Demo Lead 01")
-        follow_only = st.checkbox("Only leads needing follow-up")
+        territories = st.multiselect("Territories", sorted(frame.territory.unique()), default=sorted(frame.territory.unique()), key="territories")
+        sources = st.multiselect("Lead sources", sorted(frame.lead_source.unique()), default=sorted(frame.lead_source.unique()), key="lead_sources")
+        statuses = st.multiselect("Lead statuses", STATUSES, default=STATUSES, key="lead_statuses")
+        query = st.text_input("Search lead name or ID", placeholder="Example: Demo Lead 01", key="lead_search")
+        st.button("Reset filters", on_click=reset_filters,
+                  args=(sorted(frame.territory.unique()), sorted(frame.lead_source.unique())))
+        follow_only = st.checkbox("Only leads needing follow-up", key="follow_only")
     frame = add_flags(frame, report_date)
     view = frame[frame.territory.isin(territories) & frame.lead_source.isin(sources) & frame.status.isin(statuses)]
     if query.strip():
